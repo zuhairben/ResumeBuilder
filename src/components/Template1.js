@@ -5,7 +5,7 @@ const Template1 = ({ data }) => {
   const parseToList = (text) =>
     text ? text.split('\n').map((item) => item.trim()).filter((item) => item) : [];
 
-  const skillsArray = data.skills ? data.skills.split(',').map((skill) => skill.trim()) : [];
+  const skillsArray = parseToList(data.skills);
   const experienceArray = parseToList(data.experience);
   const educationArray = parseToList(data.education);
   const projectsArray = parseToList(data.projects);
@@ -72,7 +72,7 @@ const Template1 = ({ data }) => {
       </Section>
 
       {/* Project Section */}
-      <Section title="PROJECT">
+      <Section title="PROJECTS">
         <ul style={{ lineHeight: '1.6', marginBottom: '20px' }}>
           {projectsArray.length > 0
             ? projectsArray.map((item, index) => <li key={index} style={{ marginBottom: '10px' }}>{item}</li>)
@@ -82,48 +82,15 @@ const Template1 = ({ data }) => {
         </ul>
       </Section>
 
-      {/* Skills Section with Template 2 Logic */}
+      {/* Skills Section (Template 2 Logic) */}
       <Section title="SKILLS">
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '10px',
-            marginBottom: '20px',
-          }}
-        >
+        <ul style={{ lineHeight: '1.6', marginBottom: '20px' }}>
           {skillsArray.length > 0
-            ? skillsArray.map((skill, index) => (
-                <span
-                  key={index}
-                  style={{
-                    display: 'inline-block',
-                    backgroundColor: '#f0f0f0',
-                    borderRadius: '20px',
-                    padding: '5px 10px',
-                    fontSize: '14px',
-                    color: '#333',
-                  }}
-                >
-                  {skill}
-                </span>
-              ))
+            ? skillsArray.map((skill, index) => <li key={index}>{skill}</li>)
             : ['Skill 1', 'Skill 2', 'Skill 3'].map((skill, index) => (
-                <span
-                  key={index}
-                  style={{
-                    display: 'inline-block',
-                    backgroundColor: '#f0f0f0',
-                    borderRadius: '20px',
-                    padding: '5px 10px',
-                    fontSize: '14px',
-                    color: '#333',
-                  }}
-                >
-                  {skill}
-                </span>
+                <li key={index}>{skill}</li>
               ))}
-        </div>
+        </ul>
       </Section>
     </div>
   );
