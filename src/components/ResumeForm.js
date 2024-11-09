@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { TextField, Typography, Box } from '@mui/material';
+import { Typography, Box, TextField } from '@mui/material';
+import ReactQuill from 'react-quill';  // Import ReactQuill
+import 'react-quill/dist/quill.snow.css';  // Import Quill styles
 
 const ResumeForm = ({ onFormChange }) => {
   const [formData, setFormData] = useState({
@@ -13,14 +15,21 @@ const ResumeForm = ({ onFormChange }) => {
     education: '',
     projects: '',
     skills: '',
-    achievements: '', // Add achievements field to the form data
+    achievements: '',
   });
+
+  // Function to handle Quill editor changes
+  const handleQuillChange = (value, name) => {
+    const updatedData = { ...formData, [name]: value };
+    setFormData(updatedData);
+    onFormChange(updatedData);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     const updatedData = { ...formData, [name]: value };
     setFormData(updatedData);
-    onFormChange(updatedData); // Update the parent component with the latest form data
+    onFormChange(updatedData);
   };
 
   return (
@@ -35,63 +44,23 @@ const ResumeForm = ({ onFormChange }) => {
       <TextField label="GitHub Profile" name="github" variant="outlined" onChange={handleChange} />
       <TextField label="LinkedIn Profile" name="linkedin" variant="outlined" onChange={handleChange} />
 
-      <TextField
-        label="Professional Summary"
-        name="summary"
-        variant="outlined"
-        multiline
-        rows={4}
-        onChange={handleChange}
-      />
+      <Typography>Professional Summary</Typography>
+      <ReactQuill value={formData.summary} onChange={(value) => handleQuillChange(value, 'summary')} />
 
-      <TextField
-        label="Work Experience"
-        name="experience"
-        variant="outlined"
-        multiline
-        rows={4}
-        onChange={handleChange}
-      />
+      <Typography>Work Experience</Typography>
+      <ReactQuill value={formData.experience} onChange={(value) => handleQuillChange(value, 'experience')} />
 
-      <TextField
-        label="Education"
-        name="education"
-        variant="outlined"
-        multiline
-        rows={4}
-        onChange={handleChange}
-      />
+      <Typography>Education</Typography>
+      <ReactQuill value={formData.education} onChange={(value) => handleQuillChange(value, 'education')} />
 
-      <TextField
-        label="Projects"
-        name="projects"
-        variant="outlined"
-        multiline
-        rows={4}
-        placeholder="Add project descriptions, e.g., Project Name: Description, Technologies Used"
-        onChange={handleChange}
-      />
+      <Typography>Projects</Typography>
+      <ReactQuill value={formData.projects} onChange={(value) => handleQuillChange(value, 'projects')} />
 
-      <TextField
-        label="Skills"
-        name="skills"
-        variant="outlined"
-        multiline
-        rows={4}
-        placeholder="e.g., JavaScript, React, Node.js"
-        onChange={handleChange}
-      />
+      <Typography>Skills</Typography>
+      <ReactQuill value={formData.skills} onChange={(value) => handleQuillChange(value, 'skills')} />
 
-      {/* New Achievements TextField */}
-      <TextField
-        label="Achievements"
-        name="achievements"
-        variant="outlined"
-        multiline
-        rows={4}
-        placeholder="List any notable achievements"
-        onChange={handleChange}
-      />
+      <Typography>Achievements</Typography>
+      <ReactQuill value={formData.achievements} onChange={(value) => handleQuillChange(value, 'achievements')} />
     </Box>
   );
 };

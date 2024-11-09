@@ -1,14 +1,9 @@
 import React from 'react';
 
 const Template2 = ({ data }) => {
-  const parseToList = (text) =>
-    text ? text.split('\n').map((item) => item.trim()).filter((item) => item) : [];
-
-  const educationArray = parseToList(data.education);
-  const achievementsArray = parseToList(data.achievements);
-  const experienceArray = parseToList(data.experience);
-  const projectsArray = parseToList(data.projects);
-  const skillsArray = parseToList(data.skills);
+  const renderFormattedText = (htmlContent) => {
+    return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
+  };
 
   return (
     <div style={{ fontFamily: 'Verdana, sans-serif', padding: '30px', maxWidth: '900px', margin: 'auto' }}>
@@ -22,56 +17,29 @@ const Template2 = ({ data }) => {
           LinkedIn: <a href={data.linkedin} target="_blank" rel="noopener noreferrer">{data.linkedin}</a> | 
           GitHub: <a href={data.github} target="_blank" rel="noopener noreferrer">{data.github}</a>
         </p>
-        <h3 style={{ fontWeight: 'normal', fontSize: '14px', color: '#555' }}>
-          {data.summary || 'Professional Summary goes here.'}
-        </h3>
+        {renderFormattedText(data.summary || 'Professional Summary goes here.')}
       </div>
 
       {/* Section Wrapper */}
-      <div style={{ borderTop: '2px solid black', marginTop: '20px', paddingTop: '15px',fontSize: '14px' }}>
-        {/* Academics Section */}
+      <div style={{ borderTop: '2px solid black', marginTop: '20px', paddingTop: '15px', fontSize: '14px' }}>
         <Section title="Academics">
-          <ul>
-            {educationArray.length > 0
-              ? educationArray.map((item, index) => <li key={index}>{item}</li>)
-              : <li>Add your education details here.</li>}
-          </ul>
+          {renderFormattedText(data.education || '<p>Add your education details here.</p>')}
         </Section>
 
-        {/* Achievements Section */}
         <Section title="Achievements">
-          <ul>
-            {achievementsArray.length > 0
-              ? achievementsArray.map((item, index) => <li key={index}>{item}</li>)
-              : <li>List any achievements here.</li>}
-          </ul>
+          {renderFormattedText(data.achievements || '<p>List any achievements here.</p>')}
         </Section>
 
-        {/* Work/Internship Experience Section */}
         <Section title="Work/Internship Experience">
-          <ul>
-            {experienceArray.length > 0
-              ? experienceArray.map((item, index) => <li key={index}>{item}</li>)
-              : <li>Describe your work or internship experience.</li>}
-          </ul>
+          {renderFormattedText(data.experience || '<p>Describe your work or internship experience.</p>')}
         </Section>
 
-        {/* Projects Section */}
         <Section title="Projects">
-          <ul>
-            {projectsArray.length > 0
-              ? projectsArray.map((item, index) => <li key={index}>{item}</li>)
-              : <li>Mention your projects here.</li>}
-          </ul>
+          {renderFormattedText(data.projects || '<p>Mention your projects here.</p>')}
         </Section>
 
-        {/* Skills Section */}
         <Section title="Skills">
-          <ul>
-            {skillsArray.length > 0
-              ? skillsArray.map((item, index) => <li key={index}>{item}</li>)
-              : <li>Add your skills here.</li>}
-          </ul>
+          {renderFormattedText(data.skills || '<p>Add your skills here.</p>')}
         </Section>
       </div>
     </div>
@@ -80,16 +48,8 @@ const Template2 = ({ data }) => {
 
 /* Section Component */
 const Section = ({ title, children }) => (
-  <div style={{ marginBottom: '15px', lineHeight: '1.6'}}>
-    <h2
-      style={{
-        fontSize: '16px',
-        fontWeight: 'bold',
-        margin: '10px 0',
-        borderBottom: '1px solid black',
-        paddingBottom: '5px',
-      }}
-    >
+  <div style={{ marginBottom: '15px', lineHeight: '1.6' }}>
+    <h2 style={{ fontSize: '16px', fontWeight: 'bold', margin: '10px 0', borderBottom: '1px solid black', paddingBottom: '5px' }}>
       {title}
     </h2>
     <div>{children}</div>
