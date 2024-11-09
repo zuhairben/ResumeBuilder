@@ -17,7 +17,9 @@ const Template2 = ({ data }) => {
           LinkedIn: <a href={data.linkedin} target="_blank" rel="noopener noreferrer">{data.linkedin}</a> | 
           GitHub: <a href={data.github} target="_blank" rel="noopener noreferrer">{data.github}</a>
         </p>
+        <div style={{fontSize: '14px'}}>
         {renderFormattedText(data.summary || 'Professional Summary goes here.')}
+        </div>
       </div>
 
       {/* Section Wrapper */}
