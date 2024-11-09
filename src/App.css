@@ -1,0 +1,25 @@
+/* src/App.css */
+.app {
+  display: flex;
+}
+
+.sidebar {
+  width: 20%;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+.content {
+  width: 80%;
+  padding: 20px;
+}
+
+.resume-template {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.form-section {
+  margin-top: 20px;
+}
